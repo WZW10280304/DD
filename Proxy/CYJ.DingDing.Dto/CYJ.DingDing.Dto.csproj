@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\..\Service\CYJ.DingDing.Service.Http\Xml\CYJ.DingDing.Dto.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Dto\DingTalk.cs" />
+    <Compile Remove="Dto\ResultPackage.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BaseFrame\CYJ.Base.Infrastructure.Extension\CYJ.Utils.Extension.csproj" />
+  </ItemGroup>
+
+</Project>

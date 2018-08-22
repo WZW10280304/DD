@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CYJ.DingDing.Service.Http</name>
+    </assembly>
+    <members>
+        <member name="T:CYJ.DingDing.Service.Http.Controllers.AttendancesController">
+            <summary>
+            考勤管理
+            </summary>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.AttendancesController.GetRecord(System.String,System.Int64,System.Int64,System.Int64,System.Int32,System.String)">
+            <summary>
+            获得签到数据
+            （目前最多获取1000人以内的签到数据，如果所传部门ID及其子部门下的user超过1000）
+            </summary>
+            <param name="department_id">部门id（1 表示根部门）</param>
+            <param name="start_time">开始时间，精确到毫秒，注意字段的位数 例：1520956800000</param>
+            <param name="end_time">结束时间，精确到毫秒，注意字段的位数 例：1520956800000（默认为当前时间）</param>
+            <param name="offset">支持分页查询，与size 参数同时设置时才生效，此参数代表偏移量，从0 开始</param>
+            <param name="size">支持分页查询，与offset 参数同时设置时才生效，此参数代表分页大小，最大100</param>
+            <param name="order">排序，asc 为正序，desc 为倒序</param>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.AttendancesController.GetList(System.String,System.String,System.Collections.Generic.List{System.String},System.Int64,System.Int64)">
+            <summary>
+            获取考勤打卡数据
+            （即使员工在这期间打了多次，该接口也只会返回两条记录，包括上午的打卡结果和下午的打卡结果）
+            </summary>
+            <param name="workDateFrom">查询考勤打卡记录的起始工作日 yyyy-MM-dd hh:mm:ss</param>
+            <param name="workDateTo">查询考勤打卡记录的结束工作日 yyyy-MM-dd hh:mm:ss</param>
+            <param name="userIdList">员工在企业内的UserID列表，企业用来唯一标识用户的字段</param>
+            <param name="offset">表示获取考勤数据的起始点，第一次传0，如果还有多余数据，下次获取传的offset值为之前的offset+limit</param>
+            <param name="limit">表示获取考勤数据的条数，最大不能超过50条</param>
+            <returns></returns>
+        </member>
+        <member name="T:CYJ.DingDing.Service.Http.Controllers.DepartmentsController">
+            <summary>
+            部门管理
+            </summary>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.DepartmentsController.Get(System.Boolean,System.String)">
+            <summary>
+            获取部门列表
+            </summary>
+            <param name="fetchChild">是否递归部门的全部子部门，ISV微应用固定传递false。</param>
+            <param name="parentId">父部门id(如果不传，默认部门为根部门，根部门ID为1)</param>
+            <returns>部门列表</returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.DepartmentsController.Get(System.Int32)">
+            <summary>
+            获取部门详情
+            </summary>
+            <param name="id">部门id</param>
+            <returns>部门详情</returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.DepartmentsController.Post(CYJ.DingDing.Dto.Dto.DepartmentCreateRequest)">
+            <summary>
+            创建部门
+            </summary>
+            <param name="request">部门信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.DepartmentsController.Put(System.Int32,CYJ.DingDing.Dto.Dto.DepartmentUpdateRequest)">
+            <summary>
+            修改部门
+            </summary>
+            <param name="id">部门id</param>
+            <param name="request">部门信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.DepartmentsController.Delete(System.Int32)">
+            <summary>
+            删除部门
+            </summary>
+            <param name="id">部门id</param>
+            <returns></returns>
+        </member>
+        <member name="T:CYJ.DingDing.Service.Http.Controllers.MessagesController">
+            <summary>
+            消息管理
+            </summary>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.MessagesController.Notice(CYJ.DingDing.Dto.Dto.MessageSendRequest)">
+            <summary>
+            企业通知消息主要用来做企业通知，主要是以企业名义通知到个人，例如审批通知、任务通知、工作项通知等
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CYJ.DingDing.Service.Http.Controllers.ProcesssController">
+            <summary>
+            审批流
+            </summary>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.ProcesssController.Get(System.String,System.Int64,System.Int64,System.Int64,System.Int64,System.String)">
+            <summary>
+            分页获取该审批流对应的审批实例
+            </summary>
+            <param name="process_code">流程模板唯一标识，可在oa后台编辑审批表单部分查询</param>
+            <param name="start_time">审批实例开始时间，毫秒级</param>
+            <param name="end_time">审批实例结束时间，毫秒级，默认取当前值</param>
+            <param name="size">分页参数，每页大小，最多传10</param>
+            <param name="cursor">分页查询的游标，最开始传0，后续传返回参数中的next_cursor值</param>
+            <param name="userid_list">发起人用户id列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.ProcesssController.Get(System.String)">
+            <summary>
+            获取单个审批实例详情
+            </summary>
+            <param name="id">审批实例id</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.ProcesssController.GetPendingCount(System.String)">
+            <summary>
+            获取待我审批数量
+            </summary>
+            <param name="userid">用户id</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.ProcesssController.Post(DingTalk.Api.Request.SmartworkBpmsProcessinstanceCreateRequest)">
+            <summary>
+            发起审批实例
+            </summary>
+            <param name="request"></param>
+            <returns>审批实例id</returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.ProcesssController.Put(DingTalk.Api.Request.SmartworkBpmsProcessSyncRequest)">
+            <summary>
+            更新审批流
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.TokensController.Get(System.String,System.String)">
+            <summary>
+            获取AccessToken
+            </summary>
+            <param name="corpId">企业Id</param>
+            <param name="corpSecret">企业应用的凭证密钥</param>
+            <returns>Access_Token是企业访问钉钉开放平台全局接口的唯一凭证，即调用接口时需携带Access_Token。</returns>
+        </member>
+        <member name="T:CYJ.DingDing.Service.Http.Controllers.UsersController">
+            <summary>
+            用户管理
+            </summary>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.UsersController.GetList(System.Int64,System.Int64,System.Int32,System.String)">
+            <summary>
+            获取部门成员（详情）
+            </summary>
+            <param name="departmentId">获取的部门id</param>
+            <param name="offset">支持分页查询，与size参数同时设置时才生效，此参数代表偏移量</param>
+            <param name="size">支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，最大100</param>
+            <param name="order"> 支持分页查询，部门成员的排序规则，默认不传是按自定义排序；
+            entry_asc代表按照进入部门的时间升序，
+            entry_desc代表按照进入部门的时间降序，
+            modify_asc代表按照部门信息修改时间升序，
+            modify_desc代表按照部门信息修改时间降序，
+            custom代表用户定义(未定义时按照拼音)排序</param>
+            <returns>成员详情列表</returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.UsersController.Get(System.Int32)">
+            <summary>
+            获取用户详情
+            </summary>
+            <param name="id">用户id</param>
+            <returns>用户详细信息</returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.UsersController.Post(CYJ.DingDing.Dto.Dto.UserCreateRequest)">
+            <summary>
+            创建用户
+            </summary>
+            <param name="request">用户信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.UsersController.Put(CYJ.DingDing.Dto.Dto.UserUpdateRequest)">
+             <summary>
+            修改用户
+             </summary>
+             <param name="request">用户信息</param>
+        </member>
+        <member name="M:CYJ.DingDing.Service.Http.Controllers.UsersController.Delete(System.Int32)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="id">用户Id</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

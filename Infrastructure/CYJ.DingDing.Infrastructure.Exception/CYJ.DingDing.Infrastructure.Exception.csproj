@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Proxy\CYJ.DingDing.Dto\CYJ.DingDing.Dto.csproj" />
+  </ItemGroup>
+
+</Project>
