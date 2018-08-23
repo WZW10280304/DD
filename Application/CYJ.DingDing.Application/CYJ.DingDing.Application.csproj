@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="tiny-mapper" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Api\CYJ.DingDing.Sdks\CYJ.DingDing.Sdks.csproj" />
     <ProjectReference Include="..\..\Infrastructure\CYJ.DingDing.Infrastructure.Config\CYJ.DingDing.Infrastructure.Config.csproj" />
     <ProjectReference Include="..\..\Infrastructure\CYJ.DingDing.Infrastructure.Exception\CYJ.DingDing.Infrastructure.Exception.csproj" />

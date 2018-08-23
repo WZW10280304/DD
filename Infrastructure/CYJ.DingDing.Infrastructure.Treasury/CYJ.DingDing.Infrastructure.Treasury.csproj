@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EmitMapper" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Proxy\CYJ.DingDing.Dto\CYJ.DingDing.Dto.csproj" />
   </ItemGroup>
 

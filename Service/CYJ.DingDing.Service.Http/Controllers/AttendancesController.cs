@@ -54,7 +54,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
         // POST: api/Attendances
         [HttpGet]
         [Route("Record")]
-        public List<AttendanceRecord> GetRecord(string department_id, long start_time, long end_time, long offset, int size, string order)
+        public AttendanceRecordsResponse GetRecord(string department_id, long start_time, long end_time, long offset, int size, string order)
         {
             var apiurl = string.Format(Urls.AttendanceRecord, RequestHelper.GetAccessToken(),
                 department_id, start_time, end_time, offset, size, order);
@@ -65,7 +65,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
                 throw new ApiException(ApiCodeEnum.Error, rtn.ErrMsg);
             }
 
-            return rtn.Data;
+            return rtn;
         }
 
         /// <summary>
@@ -81,8 +81,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
         // GET: api/Attendances/5
         [HttpGet]
         [Route("List")]
-        public List<OapiAttendanceListResponse.RecordresultDomain> GetList(string workDateFrom, string workDateTo,
-            List<string> userIdList, long offset, long limit)
+        public AttendanceListResponse GetList(string workDateFrom, string workDateTo, List<string> userIdList, long offset, long limit)
         {
             var apiurl = string.Format(Urls.AttendanceList, RequestHelper.GetAccessToken());
 
@@ -95,13 +94,15 @@ namespace CYJ.DingDing.Service.Http.Controllers
                 Limit = limit
             };
 
-            var rtn = RequestHelper.Post<OapiAttendanceListResponse>(apiurl, request);
-            if (!String.Equals(rtn.ErrCode, ErrCodeEnum.OK.ToString(), StringComparison.CurrentCultureIgnoreCase))
+            //var rtn = RequestHelper.Post<OapiAttendanceListResponse>(apiurl, request);
+            //if (!String.Equals(rtn.ErrCode, ErrCodeEnum.OK.ToString(), StringComparison.CurrentCultureIgnoreCase))
+            var rtn = RequestHelper.Post<AttendanceListResponse>(apiurl, request);
+            if (rtn.ErrCode != ErrCodeEnum.OK)
             {
                 throw new ApiException(ApiCodeEnum.Error, rtn.ErrMsg);
             }
 
-            return rtn.Recordresult;
+            return rtn;
         }
     }
 }

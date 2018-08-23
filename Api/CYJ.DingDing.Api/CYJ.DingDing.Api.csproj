@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="tiny-mapper" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Application\CYJ.DingDing.Application\CYJ.DingDing.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\CYJ.DingDing.Infrastructure.Log\CYJ.DingDing.Infrastructure.Log.csproj" />
     <ProjectReference Include="..\..\Proxy\CYJ.DingDing.Dto\CYJ.DingDing.Dto.csproj" />

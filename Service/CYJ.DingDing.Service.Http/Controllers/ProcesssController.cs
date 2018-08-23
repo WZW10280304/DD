@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CYJ.DingDing.Dto.Dto;
 using CYJ.DingDing.Dto.Enum;
 using CYJ.DingDing.Infrastructure.Exception;
 using CYJ.DingDing.Infrastructure.Treasury;
@@ -22,7 +23,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
     public class ProcesssController : BaseController
     {
         /// <summary>
-        /// 分页获取该审批流对应的审批实例
+        /// 获取审批实例列表
         /// </summary>
         /// <param name="process_code">流程模板唯一标识，可在oa后台编辑审批表单部分查询</param>
         /// <param name="start_time">审批实例开始时间，毫秒级</param>
@@ -33,7 +34,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
         /// <returns></returns>
         // GET: api/Processs
         [HttpGet]
-        public SmartworkBpmsProcessinstanceListResponse.PageResultDomain Get(string process_code, long start_time, long end_time, long size, long cursor, string userid_list)
+        public SmartworkBpmsProcessinstanceListResponse Get(string process_code, long start_time, long end_time, long size, long cursor, string userid_list)
         {
             IDingTalkClient client = new DefaultDingTalkClient("https://eco.taobao.com/router/rest");
             SmartworkBpmsProcessinstanceListRequest req = new SmartworkBpmsProcessinstanceListRequest();
@@ -50,7 +51,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
                 throw new ApiException(ApiCodeEnum.Error, rsp.Result.ErrorMsg);
             }
 
-            return rsp.Result.Result;
+            return rsp;
         }
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
         /// <returns></returns>
         // GET: api/Processs/5
         [HttpGet("{id}")]
-        public SmartworkBpmsProcessinstanceGetResponse.ProcessInstanceTopVoDomain Get(string id)
+        public SmartworkBpmsProcessinstanceGetResponse Get(string id)
         {
             IDingTalkClient client = new DefaultDingTalkClient("https://eco.taobao.com/router/rest");
             SmartworkBpmsProcessinstanceGetRequest req = new SmartworkBpmsProcessinstanceGetRequest();
@@ -72,7 +73,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
                 throw new ApiException(ApiCodeEnum.Error, rsp.Result.ErrorMsg);
             }
 
-            return rsp.Result.ProcessInstance;
+            return rsp;
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("PendingCount")]
-        public long GetPendingCount(string userid)
+        public OapiProcessGettodonumResponse GetPendingCount(string userid)
         {
             IDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/process/gettodonum");
             OapiProcessGettodonumRequest req = new OapiProcessGettodonumRequest();
@@ -94,7 +95,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
                 throw new ApiException(ApiCodeEnum.Error, rsp.ErrMsg);
             }
 
-            return rsp.Count;
+            return rsp;
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
         /// <returns>审批实例id</returns>
         // POST: api/Processs
         [HttpPost]
-        public string Post(SmartworkBpmsProcessinstanceCreateRequest request)
+        public SmartworkBpmsProcessinstanceCreateResponse Post(SmartworkBpmsProcessinstanceCreateRequest request)
         {
             IDingTalkClient client = new DefaultDingTalkClient("https://eco.taobao.com/router/rest");
             SmartworkBpmsProcessinstanceCreateRequest req = new SmartworkBpmsProcessinstanceCreateRequest();
@@ -138,7 +139,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
                 throw new ApiException(ApiCodeEnum.Error, rsp.Result.ErrorMsg);
             }
 
-            return rsp.Result.ProcessInstanceId;
+            return rsp;
         }
 
         /// <summary>
@@ -148,7 +149,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
         /// <returns></returns>
         // PUT: api/Processs/5
         [HttpPut]
-        public bool Put(SmartworkBpmsProcessSyncRequest request)
+        public SmartworkBpmsProcessSyncResponse Put(SmartworkBpmsProcessSyncRequest request)
         {
             IDingTalkClient client = new DefaultDingTalkClient("https://eco.taobao.com/router/rest");
             SmartworkBpmsProcessSyncRequest req = new SmartworkBpmsProcessSyncRequest();
@@ -164,7 +165,7 @@ namespace CYJ.DingDing.Service.Http.Controllers
                 throw new ApiException(ApiCodeEnum.Error, rsp.Result.ErrorMsg);
             }
 
-            return rsp.Result.Success;
+            return rsp;
         }
 
         //// DELETE: api/ApiWithActions/5

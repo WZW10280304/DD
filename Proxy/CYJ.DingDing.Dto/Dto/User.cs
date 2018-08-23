@@ -163,6 +163,8 @@ namespace CYJ.DingDing.Dto.Dto
         /// 在分页查询时返回，代表是否还有下一页更多数据
         /// </summary>
         public bool HasMore { get; set; }
+
+        public List<UserResponse> Userlist { get; set; }
     }
 
     /// <summary>

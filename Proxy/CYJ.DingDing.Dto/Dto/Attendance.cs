@@ -1,8 +1,105 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 using CYJ.DingDing.Dto.Dto.Base;
 
 namespace CYJ.DingDing.Dto.Dto
 {
+
+    /// <summary>
+    /// OapiAttendanceListResponse.
+    /// </summary>
+    public class AttendanceListResponse : DingTalkResponse
+    {
+        /// <summary>
+        /// hasMore
+        /// </summary>
+        public bool HasMore { get; set; }
+
+        /// <summary>
+        /// recordresult
+        /// </summary>
+        public List<RecordResultDomain> Recordresult { get; set; }
+
+        /// <summary>
+        /// RecordresultDomain Data Structure.
+        /// </summary>
+
+        public class RecordResultDomain
+        {
+            /// <summary>
+            /// approveId
+            /// </summary>
+            public long ApproveId { get; set; }
+
+            /// <summary>
+            /// baseCheckTime
+            /// </summary>
+            public string BaseCheckTime { get; set; }
+
+            /// <summary>
+            /// checkType
+            /// </summary>
+            [XmlElement("checkType")]
+            public string CheckType { get; set; }
+
+            /// <summary>
+            /// groupId
+            /// </summary>
+            public long GroupId { get; set; }
+
+            /// <summary>
+            /// id
+            /// </summary>
+            public long Id { get; set; }
+
+            /// <summary>
+            /// locationResult
+            /// </summary>
+            public string LocationResult { get; set; }
+
+            /// <summary>
+            /// planId
+            /// </summary>
+            public long PlanId { get; set; }
+
+            /// <summary>
+            /// procInstId
+            /// </summary>
+            public string ProcInstId { get; set; }
+
+            /// <summary>
+            /// recordId
+            /// </summary>
+            public long RecordId { get; set; }
+
+            /// <summary>
+            /// sourceType
+            /// </summary>
+            public string SourceType { get; set; }
+
+            /// <summary>
+            /// timeResult
+            /// </summary>
+            public string TimeResult { get; set; }
+
+            /// <summary>
+            /// userCheckTime
+            /// </summary>
+            public string UserCheckTime { get; set; }
+
+            /// <summary>
+            /// userId
+            /// </summary>
+            public string UserId { get; set; }
+
+            /// <summary>
+            /// workDate
+            /// </summary>
+            public string WorkDate { get; set; }
+        }
+
+    }
+
     /// <summary>
     /// 签到数据
     /// </summary>

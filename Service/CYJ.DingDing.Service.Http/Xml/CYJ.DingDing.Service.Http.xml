@@ -93,7 +93,7 @@
         </member>
         <member name="M:CYJ.DingDing.Service.Http.Controllers.ProcesssController.Get(System.String,System.Int64,System.Int64,System.Int64,System.Int64,System.String)">
             <summary>
-            分页获取该审批流对应的审批实例
+            获取审批实例列表
             </summary>
             <param name="process_code">流程模板唯一标识，可在oa后台编辑审批表单部分查询</param>
             <param name="start_time">审批实例开始时间，毫秒级</param>
